@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Button } from 'antd';
+import { Button, Row, Col } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import CommentForm from '../CommentForm';
 import { ICommentDto } from '../../dto/comment.dto';
+import { Wrapper } from './index.style';
 
 interface CommentItemProp {
   comment: ICommentDto,
@@ -26,13 +27,26 @@ function CommentItem({ comment, onUpdate }: CommentItemProp) {
   };
 
   return (
-    <div>
-      <div>{comment.message}</div>
-      <Button icon={<EditOutlined />} onClick={onClick} size="small">Edit</Button>
-      <div style={{ display: (!showForm ? 'none' : 'block') }}>
-        <CommentForm onFinish={onFinish} comment={comment} />
+    <Wrapper>
+      <div style={{ display: (!showForm ? 'block' : 'none') }}>
+        <Button
+          className="edit-button"
+          icon={<EditOutlined />}
+          onClick={onClick}
+          size="small"
+        >
+          Edit
+        </Button>
+        <div className="content">{comment.message}</div>
       </div>
-    </div>
+      <Row>
+        <Col span={24}>
+          <div style={{ display: (!showForm ? 'none' : 'block') }}>
+            <CommentForm onFinish={onFinish} comment={comment} onCancel={toggleForm} />
+          </div>
+        </Col>
+      </Row>
+    </Wrapper>
   );
 }
 

@@ -5,21 +5,18 @@ import { ICommentDto } from '../../dto/comment.dto';
 
 interface CommentFormProp {
   onFinish: (data: ICommentDto) => void
+  onCancel: () => void
   comment: ICommentDto
 }
 
-function CommentForm({ comment, onFinish } : CommentFormProp) {
+function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
   return (
     <Form
       name="comment"
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-      style={{ maxWidth: 600 }}
       initialValues={{ message: comment.message, id: comment.id }}
       onFinish={onFinish}
     >
       <Form.Item
-        label="comment"
         name="message"
       >
         <TextArea />
@@ -30,13 +27,20 @@ function CommentForm({ comment, onFinish } : CommentFormProp) {
       >
         <Input type="text" />
       </Form.Item>
-      <Button
-        type="primary"
-        block
-        htmlType="submit"
-      >
-        Update
-      </Button>
+      <Form.Item wrapperCol={{ span: 8 }}>
+        <Button
+          type="primary"
+          htmlType="submit"
+        >
+          Update
+        </Button>
+        {' '}
+        <Button
+          onClick={onCancel}
+        >
+          Cancel
+        </Button>
+      </Form.Item>
     </Form>
   );
 }
