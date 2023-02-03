@@ -6,6 +6,7 @@ import uuid from 'react-uuid';
 import { PageWrapper } from './index.style';
 import { ICommentDto } from '../../../dto/comment.dto';
 import CommentItem from '../../../components/CommentItem';
+import CommentForm from '../../../components/CommentForm';
 
 function HomePage() {
   const { TextArea } = Input;
@@ -24,6 +25,10 @@ function HomePage() {
     setComments((prev) => [{ ...newComments }, ...prev]);
   };
 
+  const onCancel = () => {
+    console.log(1);
+  };
+
   const onUpdated = (data: ICommentDto) => {
     const newComments = comments;
     const foundIndex = comments.findIndex((x) => x.id === data.id);
@@ -39,27 +44,7 @@ function HomePage() {
     <PageWrapper>
       <Row className="new-comment-form-wrapper">
         <Col span={24}>
-          <Form
-            className="comment-form"
-            name="comment"
-            layout="vertical"
-            onFinish={onFinish}
-          >
-            <Form.Item
-              name="message"
-              rules={[{ required: true, message: 'Please input your comment!' }]}
-            >
-              <TextArea placeholder="Add you comment" />
-            </Form.Item>
-            <Form.Item wrapperCol={{ span: 6 }}>
-              <Button
-                type="primary"
-                htmlType="submit"
-              >
-                Add
-              </Button>
-            </Form.Item>
-          </Form>
+          <CommentForm onFinish={onFinish} onCancel={onCancel} />
         </Col>
       </Row>
       <Row>

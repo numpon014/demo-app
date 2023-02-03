@@ -6,40 +6,45 @@ import { ICommentDto } from '../../dto/comment.dto';
 interface CommentFormProp {
   onFinish: (data: ICommentDto) => void
   onCancel: () => void
-  comment: ICommentDto
+  comment?: ICommentDto
 }
 
 function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
   return (
     <Form
       name="comment"
-      initialValues={{ message: comment.message, id: comment.id }}
+      initialValues={{ message: comment?.message, id: comment?.id }}
       onFinish={onFinish}
     >
       <Form.Item
         name="message"
+        rules={[{ required: true, message: 'Please input your comment!' }]}
       >
-        <TextArea />
+        <TextArea rows={3} />
       </Form.Item>
       <Form.Item
         name="id"
         style={{ display: 'none' }}
       >
-        <Input type="text" />
+        <Input type="text" placeholder="Add you comment" />
       </Form.Item>
       <Form.Item wrapperCol={{ span: 8 }}>
         <Button
           type="primary"
           htmlType="submit"
         >
-          Update
+          {(comment ? 'Update' : 'Add')}
         </Button>
         {' '}
-        <Button
-          onClick={onCancel}
-        >
-          Cancel
-        </Button>
+        {
+          comment && (
+            <Button
+              onClick={onCancel}
+            >
+              Cancel
+            </Button>
+          )
+        }
       </Form.Item>
     </Form>
   );

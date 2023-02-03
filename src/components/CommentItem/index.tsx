@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Button, Row, Col } from 'antd';
+import {
+  Button, Row, Col, Typography,
+} from 'antd';
 import { EditOutlined } from '@ant-design/icons';
 import CommentForm from '../CommentForm';
 import { ICommentDto } from '../../dto/comment.dto';
@@ -11,6 +13,7 @@ interface CommentItemProp {
 }
 
 function CommentItem({ comment, onUpdate }: CommentItemProp) {
+  const { Paragraph } = Typography;
   const [showForm, setShowForm] = useState<boolean>(false);
 
   const toggleForm = () => {
@@ -37,7 +40,9 @@ function CommentItem({ comment, onUpdate }: CommentItemProp) {
         >
           Edit
         </Button>
-        <div className="content">{comment.message}</div>
+        <Paragraph className="content">
+          {comment.message}
+        </Paragraph>
       </div>
       <Row>
         <Col span={24}>
