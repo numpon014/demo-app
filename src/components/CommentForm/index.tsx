@@ -5,7 +5,7 @@ import { ICommentDto } from '../../dto/comment.dto';
 
 interface CommentFormProp {
   onFinish: (data: ICommentDto) => void
-  onCancel: () => void
+  onCancel?: () => void
   comment?: ICommentDto
 }
 

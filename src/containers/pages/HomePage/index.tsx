@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import {
-  Button, Col, Form, Input, List, Row,
-} from 'antd';
+import { Col, List, Row } from 'antd';
 import uuid from 'react-uuid';
 import { PageWrapper } from './index.style';
 import { ICommentDto } from '../../../dto/comment.dto';
@@ -9,11 +7,10 @@ import CommentItem from '../../../components/CommentItem';
 import CommentForm from '../../../components/CommentForm';
 
 function HomePage() {
-  const { TextArea } = Input;
   const [comments, setComments] = useState<ICommentDto[]>([
-    { message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam mollitia, nemo asperiores vero ab quam repellendus labore dicta! Recusandae, nulla.', id: uuid() },
-    { message: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam mollitia, nemo asperiores vero ab quam repellendus labore dicta! Recusandae, nulla.', id: uuid() },
-    { message: 'comment3', id: uuid() },
+    { message: 'This is comment 1', id: uuid() },
+    { message: 'This is comment 2', id: uuid() },
+    { message: 'This is comment 3', id: uuid() },
   ]);
 
   const onFinish = (data: ICommentDto) => {
@@ -23,10 +20,6 @@ function HomePage() {
     };
 
     setComments((prev) => [{ ...newComments }, ...prev]);
-  };
-
-  const onCancel = () => {
-    console.log(1);
   };
 
   const onUpdated = (data: ICommentDto) => {
@@ -44,7 +37,7 @@ function HomePage() {
     <PageWrapper>
       <Row className="new-comment-form-wrapper">
         <Col span={24}>
-          <CommentForm onFinish={onFinish} onCancel={onCancel} />
+          <CommentForm onFinish={onFinish} />
         </Col>
       </Row>
       <Row>
