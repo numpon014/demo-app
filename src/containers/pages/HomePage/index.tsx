@@ -5,8 +5,8 @@ import {
 import uuid from 'react-uuid';
 import CommentForm from 'components/CommentForm';
 import CommentItem from 'components/CommentItem';
-import { ICommentDto } from 'dto/comment.dto';
 import { useTranslation } from 'react-i18next';
+import { ICommentDto } from 'dto/comment.dto';
 import { PageWrapper } from './index.style';
 
 function HomePage() {
