@@ -1,4 +1,6 @@
-import { Button, Form, Input } from 'antd';
+import {
+  Button, Form, FormInstance, Input,
+} from 'antd';
 import TextArea from 'antd/es/input/TextArea';
 import React from 'react';
 import { ICommentDto } from '../../dto/comment.dto';
@@ -7,14 +9,28 @@ interface CommentFormProp {
   onFinish: (data: ICommentDto) => void
   onCancel?: () => void
   comment?: ICommentDto
+  isFormReset?: boolean
 }
 
-function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
+function CommentForm({
+  comment, onFinish, onCancel, isFormReset = false,
+} : CommentFormProp) {
+  const formRef = React.useRef<FormInstance>(null);
+
+  const onSubmit = (data: ICommentDto) => {
+    onFinish(data);
+
+    if (isFormReset) {
+      formRef.current?.resetFields();
+    }
+  };
+
   return (
     <Form
+      ref={formRef}
       name="comment"
       initialValues={{ message: comment?.message, id: comment?.id }}
-      onFinish={onFinish}
+      onFinish={onSubmit}
     >
       <Form.Item
         name="message"

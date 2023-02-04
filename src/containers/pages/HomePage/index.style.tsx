@@ -1,7 +1,12 @@
 import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
-  .new-comment-form-wrapper {
-    padding: 0 24px;
+  .list-action-wrapper {
+    display: flex;
+
+    .show-more-button, .hide-button {
+      margin: 0 auto;
+      width: 120px;
+    }
   }
 `;
