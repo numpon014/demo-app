@@ -14,6 +14,11 @@ variable "app_environment" {
   description = "Application Environment"
 }
 
+variable "app_domain_name" {
+  type        = string
+  description = "Domain name"
+}
+
 # Web App
 variable "app_web_s3_bucket_name" {
   description = "S3 Bucket for React Application"
@@ -24,4 +29,10 @@ variable "app_web_s3_bucket_name" {
 variable "certificate_arn" {
   description = "SSL ARN"
   type = string
+}
+
+# Route 53
+variable "zone_id" {
+  type        = string
+  description = "The ID of the hosted zone to contain this record"
 }

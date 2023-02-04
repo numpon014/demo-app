@@ -32,3 +32,8 @@ variable "acm_certificate_arn" {
   description = "SSL ARN"
   type = string
 }
+
+variable "aliases" {
+  description = "Cloudfront Aliases"
+  type = list(string)
+}

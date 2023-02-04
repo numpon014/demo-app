@@ -28,13 +28,29 @@ module "cloudfront" {
   app_name        = var.app_name
   app_environment = var.app_environment
 
-  acm_certificate_arn = var.certificate_arn
   s3_bucket_domain_name = module.s3_bucket.s3_bucket_domain_name
   s3_regional_domain_name = module.s3_bucket.s3_regional_domain_name
   s3_bucket_arn = module.s3_bucket.s3_bucket_arn
   s3_bucket_id = module.s3_bucket.s3_bucket_id
 
+  acm_certificate_arn = var.certificate_arn
+  aliases = [var.app_domain_name]
+
   depends_on = [
     module.s3_bucket
+  ]
+}
+
+module "route53" {
+  source = "./modules/route53"
+
+  zone_id     = var.zone_id
+  record_name = var.app_domain_name
+
+  records = [module.cloudfront.domain_name]
+
+  depends_on = [
+    module.s3_bucket,
+    module.cloudfront
   ]
 }

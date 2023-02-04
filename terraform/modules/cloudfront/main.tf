@@ -32,8 +32,14 @@ resource "aws_s3_bucket_policy" "react_app_bucket_policy" {
 resource "aws_cloudfront_distribution" "react_website_cdn" {
   enabled      = true
   price_class  = "PriceClass_200"
-  http_version = "http1.1"
-  aliases = ["${var.app_name}.numpon.com"]
+  http_version = "http2"
+  aliases      = var.aliases
+  default_root_object = "index.html"
+
+  tags = {
+    Name        = "${var.app_name}-cf"
+    Environment = var.app_environment
+  }
 
   origin {
     origin_id   = var.s3_regional_domain_name
@@ -43,8 +49,6 @@ resource "aws_cloudfront_distribution" "react_website_cdn" {
       origin_access_identity = aws_cloudfront_origin_access_identity.origin_access_identity.cloudfront_access_identity_path
     }
   }
-
-  default_root_object = "index.html"
 
   default_cache_behavior {
     allowed_methods = ["GET", "HEAD"]
@@ -88,5 +92,6 @@ resource "aws_cloudfront_distribution" "react_website_cdn" {
   viewer_certificate {
     acm_certificate_arn      = var.acm_certificate_arn
     ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 }
