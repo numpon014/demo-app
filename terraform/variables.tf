@@ -19,3 +19,9 @@ variable "app_web_s3_bucket_name" {
   description = "S3 Bucket for React Application"
   type        = string
 }
+
+# Cloudfront
+variable "certificate_arn" {
+  description = "SSL ARN"
+  type = string
+}

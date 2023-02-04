@@ -21,3 +21,20 @@ module "s3_bucket" {
 
   s3_bucket_name = var.app_web_s3_bucket_name
 }
+
+module "cloudfront" {
+  source = "./modules/cloudfront"
+
+  app_name        = var.app_name
+  app_environment = var.app_environment
+
+  acm_certificate_arn = var.certificate_arn
+  s3_bucket_domain_name = module.s3_bucket.s3_bucket_domain_name
+  s3_regional_domain_name = module.s3_bucket.s3_regional_domain_name
+  s3_bucket_arn = module.s3_bucket.s3_bucket_arn
+  s3_bucket_id = module.s3_bucket.s3_bucket_id
+
+  depends_on = [
+    module.s3_bucket
+  ]
+}
