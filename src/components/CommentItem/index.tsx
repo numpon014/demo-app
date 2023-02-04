@@ -44,13 +44,9 @@ function CommentItem({ comment, onUpdate }: CommentItemProp) {
           {comment.message}
         </Paragraph>
       </div>
-      <Row>
-        <Col span={24}>
-          <div style={{ display: (!showForm ? 'none' : 'block') }}>
-            <CommentForm onFinish={onFinish} comment={comment} onCancel={toggleForm} />
-          </div>
-        </Col>
-      </Row>
+      {
+        (showForm) && (<CommentForm onFinish={onFinish} comment={comment} onCancel={toggleForm} />)
+      }
     </Wrapper>
   );
 }

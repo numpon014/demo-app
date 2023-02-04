@@ -53,8 +53,8 @@ function HomePage() {
     setCurrentShowItem(initialShowItem);
   };
 
-  const commentListAction = () => (
-    <div className="list-action-wrapper">
+  const commentListFooter = () => (
+    <div className="comment-list-footer">
       {
           (currentShowItem < comments.length) && (
             <Button className="show-more-button" onClick={onLoadMore} size="small">Show More</Button>
@@ -73,16 +73,16 @@ function HomePage() {
       <Row className="new-comment-form-wrapper">
         <Col span={24}>
           <Title level={3}>Create new comment</Title>
-          <CommentForm onFinish={onFinish} isFormReset />
+          <CommentForm onFinish={onFinish} />
         </Col>
       </Row>
       <Row>
         <Col span={24}>
           <List
-            header={<div>{`Total comment: ${comments.length}`}</div>}
-            footer={commentListAction()}
-            itemLayout="horizontal"
             bordered
+            header={<div className="comment-list-header">{`Total comment: ${comments.length}`}</div>}
+            footer={commentListFooter()}
+            itemLayout="horizontal"
             dataSource={comments.slice(0, currentShowItem)}
             renderItem={(comment: ICommentDto) => (
               <List.Item>

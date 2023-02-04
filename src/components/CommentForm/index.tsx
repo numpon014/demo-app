@@ -9,20 +9,15 @@ interface CommentFormProp {
   onFinish: (data: ICommentDto) => void
   onCancel?: () => void
   comment?: ICommentDto
-  isFormReset?: boolean
 }
 
-function CommentForm({
-  comment, onFinish, onCancel, isFormReset = false,
-} : CommentFormProp) {
+function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
   const formRef = React.useRef<FormInstance>(null);
 
   const onSubmit = (data: ICommentDto) => {
     onFinish(data);
 
-    if (isFormReset) {
-      formRef.current?.resetFields();
-    }
+    formRef.current?.resetFields();
   };
 
   return (

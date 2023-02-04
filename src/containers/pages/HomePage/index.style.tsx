@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 
 export const PageWrapper = styled.div`
-  .list-action-wrapper {
+  .comment-list-header {
+    text-align: right;
+  }
+  .comment-list-footer {
     display: flex;
 
     .show-more-button, .hide-button {
