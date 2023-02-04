@@ -16,7 +16,7 @@ function HomePage() {
   const showMoreItemPerTime = 3;
   const [currentShowItem, setCurrentShowItem] = useState<number>(initialShowItem);
   const [comments, setComments] = useState<ICommentDto[]>([
-    { message: 'This is comment 1', id: uuid() },
+    { message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', id: uuid() },
     { message: 'This is comment 2', id: uuid() },
     { message: 'This is comment 3', id: uuid() },
   ]);

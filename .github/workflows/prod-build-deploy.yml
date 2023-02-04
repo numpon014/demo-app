@@ -4,7 +4,7 @@ name: prod-build-and-deploy
 on:
   push:
     branches:
-      - main
+      - develop
 jobs:
   # To build the project
   build:
@@ -18,6 +18,10 @@ jobs:
           node-version: "16"
       - name: Installing dependencies
         run: yarn install
+      - name: lint
+        run: yarn lint
+      - name: unit testing
+        run: yarn test:nowatch
       - name: Building project
         run: yarn build
       - name: Configure AWS Credentials
