@@ -4,7 +4,7 @@ name: prod-build-and-deploy
 on:
   push:
     branches:
-      - dev
+      - main
 jobs:
   # To build the project
   build:
