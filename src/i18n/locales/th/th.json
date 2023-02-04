@@ -1,0 +1,14 @@
+{
+  "comment": {
+    "total": "Total comments: {{total}}",
+    "edit_button": "Edit",
+    "show_more": "Show more",
+    "hide_comment": "Hide comments",
+    "form": {
+      "title": "Create new comment",
+      "add_button": "Add",
+      "update_button": "Update",
+      "cancel_button": "Cancel"
+    }
+  }
+}

@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import {
-  Button, Row, Col, Typography,
-} from 'antd';
+import { Button, Typography } from 'antd';
 import { EditOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+import { ICommentDto } from 'dto/comment.dto';
 import CommentForm from '../CommentForm';
-import { ICommentDto } from '../../dto/comment.dto';
 import { Wrapper } from './index.style';
 
 interface CommentItemProp {
@@ -13,6 +12,7 @@ interface CommentItemProp {
 }
 
 function CommentItem({ comment, onUpdate }: CommentItemProp) {
+  const { t } = useTranslation();
   const { Paragraph } = Typography;
   const [showForm, setShowForm] = useState<boolean>(false);
 
@@ -38,7 +38,7 @@ function CommentItem({ comment, onUpdate }: CommentItemProp) {
           onClick={onClick}
           size="small"
         >
-          Edit
+          {t('comment.edit_button')}
         </Button>
         <Paragraph className="content">
           {comment.message}

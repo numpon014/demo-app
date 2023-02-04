@@ -1,9 +1,9 @@
+import React from 'react';
 import {
   Button, Form, FormInstance, Input,
 } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
-import React from 'react';
-import { ICommentDto } from '../../dto/comment.dto';
+import { useTranslation } from 'react-i18next';
+import { ICommentDto } from 'dto/comment.dto';
 
 interface CommentFormProp {
   onFinish: (data: ICommentDto) => void
@@ -12,11 +12,12 @@ interface CommentFormProp {
 }
 
 function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
+  const { t } = useTranslation();
+  const { TextArea } = Input;
   const formRef = React.useRef<FormInstance>(null);
 
   const onSubmit = (data: ICommentDto) => {
     onFinish(data);
-
     formRef.current?.resetFields();
   };
 
@@ -44,16 +45,12 @@ function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
           type="primary"
           htmlType="submit"
         >
-          {(comment ? 'Update' : 'Add')}
+          {(comment ? t('comment.form.update_button') : t('comment.form.add_button'))}
         </Button>
         {' '}
         {
           comment && (
-            <Button
-              onClick={onCancel}
-            >
-              Cancel
-            </Button>
+            <Button onClick={onCancel}>{t('comment.form.cancel_button')}</Button>
           )
         }
       </Form.Item>

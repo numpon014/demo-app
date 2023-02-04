@@ -3,13 +3,15 @@ import {
   Button, Col, List, Row, Typography,
 } from 'antd';
 import uuid from 'react-uuid';
+import CommentForm from 'components/CommentForm';
+import CommentItem from 'components/CommentItem';
+import { ICommentDto } from 'dto/comment.dto';
+import { useTranslation } from 'react-i18next';
 import { PageWrapper } from './index.style';
-import { ICommentDto } from '../../../dto/comment.dto';
-import CommentItem from '../../../components/CommentItem';
-import CommentForm from '../../../components/CommentForm';
 
 function HomePage() {
   const { Title } = Typography;
+  const { t } = useTranslation();
   const initialShowItem = 3;
   const showMoreItemPerTime = 3;
   const [currentShowItem, setCurrentShowItem] = useState<number>(initialShowItem);
@@ -57,12 +59,12 @@ function HomePage() {
     <div className="comment-list-footer">
       {
           (currentShowItem < comments.length) && (
-            <Button className="show-more-button" onClick={onLoadMore} size="small">Show More</Button>
+            <Button className="show-more-button" onClick={onLoadMore} size="small">{t('comment.show_more')}</Button>
           )
         }
       {
           ((currentShowItem === comments.length) && (currentShowItem !== initialShowItem)) && (
-            <Button className="hide-button" onClick={onHideComment} size="small">Hide Comment</Button>
+            <Button className="hide-button" onClick={onHideComment} size="small">{t('comment.hide_comment')}</Button>
           )
         }
     </div>
@@ -72,7 +74,7 @@ function HomePage() {
     <PageWrapper>
       <Row className="new-comment-form-wrapper">
         <Col span={24}>
-          <Title level={3}>Create new comment</Title>
+          <Title level={3}>{t('comment.form.title')}</Title>
           <CommentForm onFinish={onFinish} />
         </Col>
       </Row>
@@ -80,7 +82,7 @@ function HomePage() {
         <Col span={24}>
           <List
             bordered
-            header={<div className="comment-list-header">{`Total comment: ${comments.length}`}</div>}
+            header={<div className="comment-list-header">{t('comment.total', { total: comments.length })}</div>}
             footer={commentListFooter()}
             itemLayout="horizontal"
             dataSource={comments.slice(0, currentShowItem)}
