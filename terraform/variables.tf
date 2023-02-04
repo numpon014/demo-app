@@ -36,3 +36,9 @@ variable "zone_id" {
   type        = string
   description = "The ID of the hosted zone to contain this record"
 }
+
+# Github Action
+variable "github_iam_user" {
+  type = string
+  description = "AWS IAM user to run github action"
+}

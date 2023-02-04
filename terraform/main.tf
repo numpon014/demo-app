@@ -46,8 +46,21 @@ module "route53" {
 
   zone_id     = var.zone_id
   record_name = var.app_domain_name
-
   records = [module.cloudfront.domain_name]
+
+  depends_on = [
+    module.s3_bucket,
+    module.cloudfront
+  ]
+}
+
+module "iam" {
+  source = "./modules/iam"
+
+  github_iam_user = var.github_iam_user
+
+  s3_bucket_arn = module.s3_bucket.s3_bucket_arn
+  distribution_arn = module.cloudfront.distribution_arn
 
   depends_on = [
     module.s3_bucket,
