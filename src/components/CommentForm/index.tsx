@@ -32,25 +32,26 @@ function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
         name="message"
         rules={[{ required: true, message: 'Please input your comment!' }]}
       >
-        <TextArea rows={3} />
+        <TextArea rows={3} data-testid="message-textarea" />
       </Form.Item>
       <Form.Item
         name="id"
         style={{ display: 'none' }}
       >
-        <Input type="text" placeholder="Add you comment" />
+        <Input type="text" data-testid="message-id" />
       </Form.Item>
       <Form.Item wrapperCol={{ span: 8 }}>
         <Button
           type="primary"
           htmlType="submit"
+          data-testid="submit-button"
         >
           {(comment ? t('comment.form.update_button') : t('comment.form.add_button'))}
         </Button>
         {' '}
         {
           comment && (
-            <Button onClick={onCancel}>{t('comment.form.cancel_button')}</Button>
+            <Button onClick={onCancel} className="cancel-button">{t('comment.form.cancel_button')}</Button>
           )
         }
       </Form.Item>
