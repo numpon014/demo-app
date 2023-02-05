@@ -19,6 +19,7 @@ function HomePage() {
     { message: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s', id: uuid() },
     { message: 'This is comment 2', id: uuid() },
     { message: 'This is comment 3', id: uuid() },
+    { message: 'This is comment 4', id: uuid() },
   ]);
 
   const onFinish = (data: ICommentDto) => {
@@ -59,12 +60,16 @@ function HomePage() {
     <div className="comment-list-footer">
       {
           (currentShowItem < comments.length) && (
-            <Button className="show-more-button" onClick={onLoadMore} size="small">{t('comment.show_more')}</Button>
+            <Button className="show-more-button" onClick={onLoadMore} size="small" data-testid="show-more-button">
+              {t('comment.show_more')}
+            </Button>
           )
         }
       {
           ((currentShowItem === comments.length) && (currentShowItem !== initialShowItem)) && (
-            <Button className="hide-button" onClick={onHideComment} size="small">{t('comment.hide_comment')}</Button>
+            <Button className="hide-button" onClick={onHideComment} size="small" data-testid="hide-button">
+              {t('comment.hide_comment')}
+            </Button>
           )
         }
     </div>
@@ -82,7 +87,11 @@ function HomePage() {
         <Col span={24}>
           <List
             bordered
-            header={<div className="comment-list-header">{t('comment.total', { total: comments.length })}</div>}
+            header={(
+              <div className="comment-list-header" data-testid="comment-total" data-total={comments.length}>
+                {t('comment.total', { total: comments.length })}
+              </div>
+            )}
             footer={commentListFooter()}
             itemLayout="horizontal"
             dataSource={comments.slice(0, currentShowItem)}

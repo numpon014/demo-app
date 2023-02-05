@@ -30,7 +30,7 @@ function CommentItem({ comment, onUpdate }: CommentItemProp) {
   };
 
   return (
-    <Wrapper>
+    <Wrapper data-testid="comment-item">
       <div style={{ display: (!showForm ? 'block' : 'none') }}>
         <Button
           className="edit-button"
