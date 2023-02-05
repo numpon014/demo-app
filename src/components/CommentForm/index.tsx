@@ -38,7 +38,7 @@ function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
         name="id"
         style={{ display: 'none' }}
       >
-        <Input type="text" placeholder="Add you comment" />
+        <Input type="text" data-testid="message-id" />
       </Form.Item>
       <Form.Item wrapperCol={{ span: 8 }}>
         <Button
@@ -51,7 +51,7 @@ function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
         {' '}
         {
           comment && (
-            <Button onClick={onCancel}>{t('comment.form.cancel_button')}</Button>
+            <Button onClick={onCancel} className="cancel-button">{t('comment.form.cancel_button')}</Button>
           )
         }
       </Form.Item>

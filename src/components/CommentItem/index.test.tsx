@@ -14,7 +14,7 @@ describe('#Comment Item', () => {
     { message: 'This is comment 3', id: uuid() },
   ];
 
-  const mockUpdateFunction = () => {};
+  const mockUpdateFunction = jest.fn();
 
   test('should render the comment item successfully', () => {
     const comment = comments[1];
@@ -25,7 +25,7 @@ describe('#Comment Item', () => {
     expect(container.querySelector('.edit-button')).not.toBeNull();
   });
 
-  test('should render form successfully when clicking edit button', () => {
+  test('should render form when clicking edit button', () => {
     const comment = comments[1];
     render(
       <CommentItem comment={comment} onUpdate={mockUpdateFunction} />,
