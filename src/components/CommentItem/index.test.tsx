@@ -1,5 +1,5 @@
 import uuid from 'react-uuid';
-import { render } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { ICommentDto } from 'dto/comment.dto';
 import CommentItem from './index';
 
@@ -16,12 +16,22 @@ describe('#Comment Item', () => {
 
   const mockUpdateFunction = () => {};
 
-  test('renders successfully', () => {
+  test('should render the comment item successfully', () => {
     const comment = comments[1];
     const { container } = render(
       <CommentItem comment={comment} onUpdate={mockUpdateFunction} />,
     );
     expect(container.querySelector('.content')?.textContent).toEqual(comment.message);
     expect(container.querySelector('.edit-button')).not.toBeNull();
+  });
+
+  test('should render form successfully when clicking edit button', () => {
+    const comment = comments[1];
+    render(
+      <CommentItem comment={comment} onUpdate={mockUpdateFunction} />,
+    );
+    fireEvent.click(screen.getByTestId('edit-button'));
+
+    expect(screen.getByTestId('comment-update')).toBeInTheDocument();
   });
 });

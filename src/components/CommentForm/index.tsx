@@ -32,7 +32,7 @@ function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
         name="message"
         rules={[{ required: true, message: 'Please input your comment!' }]}
       >
-        <TextArea rows={3} />
+        <TextArea rows={3} data-testid="message-textarea" />
       </Form.Item>
       <Form.Item
         name="id"
@@ -44,6 +44,7 @@ function CommentForm({ comment, onFinish, onCancel } : CommentFormProp) {
         <Button
           type="primary"
           htmlType="submit"
+          data-testid="submit-button"
         >
           {(comment ? t('comment.form.update_button') : t('comment.form.add_button'))}
         </Button>

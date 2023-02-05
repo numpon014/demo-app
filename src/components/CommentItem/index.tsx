@@ -34,6 +34,7 @@ function CommentItem({ comment, onUpdate }: CommentItemProp) {
       <div style={{ display: (!showForm ? 'block' : 'none') }}>
         <Button
           className="edit-button"
+          data-testid="edit-button"
           icon={<EditOutlined />}
           onClick={onClick}
           size="small"
@@ -45,7 +46,11 @@ function CommentItem({ comment, onUpdate }: CommentItemProp) {
         </Paragraph>
       </div>
       {
-        (showForm) && (<CommentForm onFinish={onFinish} comment={comment} onCancel={toggleForm} />)
+        (showForm) && (
+          <div data-testid="comment-update">
+            <CommentForm onFinish={onFinish} comment={comment} onCancel={toggleForm} />
+          </div>
+        )
       }
     </Wrapper>
   );
